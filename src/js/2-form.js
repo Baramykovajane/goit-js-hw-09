@@ -7,13 +7,6 @@ let formData = {
 
 const STORAGE_KEY = "feedback-form-state";
 
-form.addEventListener("input", (event) => {
-  const { name, value } = event.target;
-  formData[name] = value.trim(); 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-});
-
-
 const savedData = localStorage.getItem(STORAGE_KEY);
 if (savedData) {
   formData = JSON.parse(savedData);
@@ -21,6 +14,11 @@ if (savedData) {
   form.elements.message.value = formData.message || "";
 }
 
+form.addEventListener("input", (event) => {
+  const { name, value } = event.target;
+  formData[name] = value.trim(); 
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+});
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
